@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var ws = require("nodejs-websocket");
+
+var ws_client = ws.connect("ws://localhost:8001/chat");
+
+ws_client.on("connect", function () {
+    var hello = "Hello from client to server";
+    console.log("Sending message to server:  \"" + hello + "\"");
+    ws_client.sendText(hello);
+});
+
+ws_client.on("text", function (reply) {
+    console.log("Reply from server: \"" + reply + "\"");
+    ws_client.close();
+});
+
+ws_client.on("close", function (code, reason) {
+        console.log("Connection closed: code=" + code +", reason=" + reason);
+});
+
+ws_client.on("error", function (err) {
+    console.log ("ws_client error: " + err);
+});
+
