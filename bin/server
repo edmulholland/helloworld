@@ -33,4 +33,5 @@ var ws_server = ws.createServer(function (conn) {
     })
 }).listen(8001)
 
+console.log('The http server has started at: ' + url);
 console.log('The ws server has started at port 8001');
